@@ -1,0 +1,7 @@
+/*
+Copyright DHTMLX LTD. http://www.dhtmlx.com
+To use this component please contact sales@dhtmlx.com to obtain license
+*/
+Scheduler.plugin(function(b){b.expand=function(){var a=b._obj;do a._position=a.style.position||"",a.style.position="static";while((a=a.parentNode)&&a.style);a=b._obj;a.style.position="absolute";a._width=a.style.width;a._height=a.style.height;a.style.width=a.style.height="100%";a.style.top=a.style.left="0px";var c=document.body;c.scrollTop=0;if(c=c.parentNode)c.scrollTop=0;document.body._overflow=document.body.style.overflow||"";document.body.style.overflow="hidden";b._maximize()};b.collapse=function(){var a=
+b._obj;do a.style.position=a._position;while((a=a.parentNode)&&a.style);a=b._obj;a.style.width=a._width;a.style.height=a._height;document.body.style.overflow=document.body._overflow;b._maximize()};b.attachEvent("onTemplatesReady",function(){var a=document.createElement("DIV");a.className="dhx_expand_icon";b.toggleIcon=a;b._obj.appendChild(a);a.onclick=function(){b.expanded?b.collapse():b.expand()}});b._maximize=function(){this.expanded=!this.expanded;this.toggleIcon.style.backgroundPosition="0px "+
+(this.expanded?"0":"18")+"px";for(var a=["left","top"],c=0;c<a.length;c++){var e=b.xy["margin_"+a[c]],d=b["_prev_margin_"+a[c]];b.xy["margin_"+a[c]]?(b["_prev_margin_"+a[c]]=b.xy["margin_"+a[c]],b.xy["margin_"+a[c]]=0):d&&(b.xy["margin_"+a[c]]=b["_prev_margin_"+a[c]],delete b["_prev_margin_"+a[c]])}b.callEvent("onSchedulerResize",[])&&b.update_view()}});

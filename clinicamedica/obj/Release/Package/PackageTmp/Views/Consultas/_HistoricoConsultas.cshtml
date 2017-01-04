@@ -1,0 +1,65 @@
+﻿@model IEnumerable<clinicamedica.Models.Consulta>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Médico", "Index", new { sortOrder = ViewBag.MedicoSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Paciente", "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Plano de Saúde", "Index", new { sortOrder = ViewBag.PlanoSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Data", "Index", new { sortOrder = ViewBag.DateSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Horário", "Index", new { sortOrder = ViewBag.TimeSortParm })
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var item in Model)
+        {
+            if (item.Data.Date < DateTime.Now.Date)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.medico.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.paciente.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlanoDeSaude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                    </td>
+
+                    <td>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Secretaria"))
+                    {
+                            <a href="@Url.Action("Edit", new { id = item.IDConsulta })"> <span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Editar" aria-hidden="true"></span>  </a>
+
+                        }
+
+                        <a href="@Url.Action("Details", new { id = item.IDConsulta })"> <span class="glyphicon glyphicon-zoom-in" data-toggle="tooltip" data-placement="top" title="Detalhes" aria-hidden="true"></span>  </a>
+
+                     
+
+                    </td>
+                </tr>
+
+            }
+
+        }
+    </tbody>
+</table>

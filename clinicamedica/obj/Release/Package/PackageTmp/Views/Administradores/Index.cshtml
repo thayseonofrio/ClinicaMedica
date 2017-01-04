@@ -1,0 +1,39 @@
+﻿@model IEnumerable<clinicamedica.Models.Administrador>
+
+@{
+    ViewBag.Title = "Administradores";
+}
+
+<h2>Administradores do Sistema</h2>
+
+<p>
+    @Html.ActionLink("Inserir novo", "Create", null, new { @class = "pull-right" })
+</p>
+
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+
+            <th></th>
+        </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = item.IDAdmin })"> <span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Editar" aria-hidden="true"></span>  </a>
+                        <a href="@Url.Action("Details", new { id = item.IDAdmin })"> <span class="glyphicon glyphicon-zoom-in" data-toggle="tooltip" data-placement="top" title="Detalhes" aria-hidden="true"></span>  </a>
+                        <a href="@Url.Action("Delete", new { id = item.IDAdmin })"> <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Excluir" aria-hidden="true"></span>  </a>
+                    </td>
+                </tr>
+            }
+ 
+</table>

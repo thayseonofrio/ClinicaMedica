@@ -1,0 +1,53 @@
+﻿@model clinicamedica.Models.Administrador
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes do Administrador @Model.Nome</h2>
+
+<div>
+    <h4>Administrador</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <ul class="nav nav-tabs nav-justified">
+        <li>@Html.ActionLink("Editar", "Edit", new { id = Model.IDAdmin }) </li>
+        <li>@Html.ActionLink("Todos Administradores", "Index")</li>
+    </ul>
+        
+</p>

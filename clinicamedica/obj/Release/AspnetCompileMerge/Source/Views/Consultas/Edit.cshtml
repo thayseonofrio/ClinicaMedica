@@ -1,0 +1,110 @@
+﻿@model clinicamedica.Models.Consulta
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar a consulta @Model.IDConsulta</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Consulta</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IDConsulta)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDPaciente, "Paciente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IDPaciente", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IDPaciente, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDMedico, "Médico", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IDMedico", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IDMedico, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlanoDeSaude,"Plano de Saude", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PlanoDeSaude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PlanoDeSaude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
+                @{
+                    if (TempData["DataInvalida"] != null)
+                    {
+                        <text> A data inserida não é válida. </text>
+                    }
+                }
+                @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Time, clinicamedica.Models.ListaHorarios.getHorarios(), " ", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="pull-right">
+            
+
+            @if ((DateTime.Compare(Model.Data.Date, DateTime.Now.Date)) >= 0)
+            {
+                @Html.ActionLink("Desmarcar Consulta", "Delete", new { id = Model.IDConsulta });
+            }
+            else
+            {
+                <div class="checkbox pull-right alert-waring">
+                    @Html.CheckBoxFor(m => m.Comparecimento)
+                    @Html.LabelFor(m => m.Comparecimento, "A data desta consulta ja passou. O paciente não compareceu?")
+
+                 </div>
+            }
+        </div>
+
+        
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Salvar" class="btn btn-default" />
+        </div>
+    </div>
+    <ul class="nav nav-tabs nav-justified">
+       <li>@Html.ActionLink("Ver Todas Consultas", "Index")</li>
+    </ul>
+        }
+        @if ((TempData["Erro"]) != null)
+        {
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @Html.Raw(TempData["Erro"])
+            </div>
+
+
+        }
+
+
+
+        @section Scripts {
+    
+        }

@@ -1,0 +1,56 @@
+﻿@model clinicamedica.Models.Secretaria
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Secretária @Model.Nome</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+
+        <dt>
+            <text>Endereço</text>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <ul class="nav nav-tabs nav-justified">
+        @if (User.IsInRole("Admin"))
+        {
+           <li>@Html.ActionLink("Editar", "Edit", new { id = Model.IDSecretaria })</li>
+        }
+
+        <li>@Html.ActionLink("Todas Secretárias", "Index")</li>
+    </ul>
+</p>

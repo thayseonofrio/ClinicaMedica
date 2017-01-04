@@ -1,0 +1,79 @@
+﻿@model IEnumerable<clinicamedica.Models.Medico>
+
+@{
+    ViewBag.Title = "Médicos";
+}
+
+<h2>Médicos</h2>
+
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Inserir Novo", "Create", null, new { @class = "pull-right" })
+    }
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        <h4>Buscar Médico:</h4>
+
+        <div class="col-md-10">
+            @Html.TextBox("SearchString", "", new { @class = "form-control busca-form" })
+        </div>
+        <div class="col-md-2">
+            <input class="form-control busca-form pull-right" type="submit" value="Buscar" />
+        </div>
+
+    </p>
+}
+
+<table style="margin-top: 70px" class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Especialidade)
+        </th>
+
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Especialidade)
+        </td>
+        
+        <td>
+       
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("Edit", new { id = item.IDMedico })"> <span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Editar"  aria-hidden="true"></span>  </a>
+
+            }
+            <a href="@Url.Action("Details", new { id = item.IDMedico })"> <span class="glyphicon glyphicon-zoom-in" data-toggle="tooltip" data-placement="top" title="Detalhes" aria-hidden="true"></span>  </a>
+
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("Delete", new { id = item.IDMedico })"> <span class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Excluir" aria-hidden="true"></span>  </a>
+ 
+            }
+            
+        </td>
+    </tr>
+}
+
+</table>
+
+

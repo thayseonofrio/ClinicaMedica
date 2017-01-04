@@ -1,0 +1,88 @@
+﻿@model clinicamedica.Models.Medico
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+@if (User.Identity.Name.Equals(Model.Email))
+{
+    <button type="button" class="btn btn-link pull-right" data-toggle="modal" data-target=".modal-consultas">Ver Consultas Agendadas</button>
+
+    <div class="modal fade modal-consultas" tabindex="-1" role="dialog" aria-labelledby="modal-consultas">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                @{
+
+
+                    @Html.Partial("_ListaConsultas");
+                }
+            </div>
+        </div>
+    </div>
+}
+<div>
+    <h4>Médico @Model.Nome</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Especialidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Especialidade)
+        </dd>
+
+        
+        
+      
+    </dl>
+   
+    
+</div>
+
+
+
+    <ul class="nav nav-tabs nav-justified">
+        @if (User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Editar", "Edit", new { id = Model.IDMedico })</li>
+        }
+
+        <li>@Html.ActionLink("Todos Médicos", "Index")</li>
+    </ul>
+

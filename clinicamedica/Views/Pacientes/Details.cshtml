@@ -1,0 +1,70 @@
+﻿@model clinicamedica.Models.Paciente
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes do Paciente @Model.Nome</h2>
+
+<div>
+    <h4>Paciente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nascimento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nascimento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacao)
+        </dt>
+        @if (User.IsInRole("Medico"))
+        {
+            <dd>
+                @Html.DisplayFor(model => model.Observacao)
+            </dd>
+        }
+        else
+        {
+            <dd style="margin-top: 30px">
+                <text class="alert alert-danger">Apenas o médico pode ver observações do paciente.</text>
+            </dd>
+        }
+    </dl>
+</div>
+<p>
+    <ul class="nav nav-tabs nav-justified">
+        <li>@Html.ActionLink("Editar", "Edit", new { id = Model.IDPaciente })</li>
+
+        <li>@Html.ActionLink("Todos Pacientes", "Index")</li>
+    </ul>
+</p>

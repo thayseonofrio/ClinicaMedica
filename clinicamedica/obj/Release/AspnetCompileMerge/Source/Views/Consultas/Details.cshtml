@@ -1,0 +1,76 @@
+﻿@model clinicamedica.Models.Consulta
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes da Consulta @Model.IDConsulta</h2>
+
+<div>
+    <h4>Consulta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <text> Médico </text>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.medico.Nome)
+        </dd>
+
+        <dt>
+            <text> Paciente </text>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paciente.Nome)
+        </dd>
+
+        <dt>
+            <text> Plano de Saúde </text>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlanoDeSaude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        
+        
+
+    </dl>
+    @{
+        if (Model.Comparecimento == true)
+        {
+            <div class="alert-danger pull-right"> Consulta sem comparecimento </div>
+        }
+    }
+</div>
+<p>
+    <ul class="nav nav-tabs nav-justified">
+        @if (User.IsInRole("Admin") || User.IsInRole("Secretaria"))
+        {
+            <li>@Html.ActionLink("Editar", "Edit", new { id = Model.IDConsulta })</li>
+        }
+        <li>@Html.ActionLink("Todas Consultas", "Index")</li>
+    </ul>
+
+
+
+
+</p>

@@ -1,0 +1,42 @@
+﻿@model clinicamedica.Models.Medico
+
+@{
+    ViewBag.Title = "Consultas Agendadas";
+}
+
+<table class="table table-striped">
+    <caption class="center"> Consultas Agendadas </caption>
+    <thead>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Data
+            </th>
+            <th>
+                Horário
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Consultas)
+        {
+            if (item.Data.Date >= DateTime.Now.Date)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.paciente.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                    </td>
+                </tr>
+            } 
+        }
+    </tbody>
+</table>

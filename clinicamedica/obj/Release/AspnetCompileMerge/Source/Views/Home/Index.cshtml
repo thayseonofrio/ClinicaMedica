@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNet.Identity
+@model clinicamedica.Models.BancoContexto
+@{
+    ViewBag.Title = "Página Inicial";
+}
+
+<!--Se o usuário não estiver logado, exibe uma mensagem -->
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="jumbotron">
+        <h1>Acesso Negado</h1>
+        <p class="lead">Este é um sistema privado. Você precisa estar logado para acessar o sistema.</p>
+        <p><a href="~/account/login" class="btn btn-primary btn-lg btn-block">Entrar</a></p>
+    </div>
+}
+else
+{
+    <style>
+        body {
+            background-image: url(/image/clinica.jpg);
+            background-size: cover;
+        }
+
+        .body-content {
+            background-color: rgba(255,255,255, 0.7);
+            padding-top: 5%;
+            width: 90%;
+            margin: 0 auto;
+        }
+        .nav-tabs.nav-justified {
+            background-color: #fff;
+        }
+    </style>
+
+    <div class="jumbtron">
+        <h1> Bem-vindo ao CliniMed</h1>
+        <p class="lead"> Utilize o menu acima para acessar as funcionalidades do sistema </p>
+    </div>
+
+    if (User.IsInRole("Admin"))
+    {
+        <ul class="nav nav-tabs nav-justified">
+            
+            <li><a href="~/Administradores/Create"> Adicionar Administrador</a></li>
+            <li><a href="~/Medicos/Create"> Adicionar Médico</a></li>
+            <li><a href="~/Secretarias/Create"> Adicionar Secretária</a></li>
+        </ul>
+
+
+    }
+    
+}
+

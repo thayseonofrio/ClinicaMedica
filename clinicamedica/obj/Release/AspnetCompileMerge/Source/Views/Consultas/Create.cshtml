@@ -1,0 +1,99 @@
+﻿@model clinicamedica.Models.Consulta
+
+@{
+    ViewBag.Title = "Inserir";
+}
+
+
+<h2>Inserir Consulta</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Consulta</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDPaciente, "Paciente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IDPaciente", null, htmlAttributes: new { @class = "form-control" }) 
+                @Html.ActionLink("Inserir Paciente Novo", "Create", "Pacientes")
+                @Html.ValidationMessageFor(model => model.IDPaciente, "", new { @class = "text-danger" })
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDMedico, "Médico", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IDMedico", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IDMedico, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlanoDeSaude, "Plano de Saúde", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PlanoDeSaude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PlanoDeSaude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control jqueryui-maker-datepicker", placeholder = "dd/mm/aaaa" } })
+                @{
+                    if (TempData["DataInvalida"] != null)
+                    {
+                        <text> A data inserida não é válida. </text>
+                    }
+                }
+                @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.Time, "Horário", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownListFor(model => model.Time, clinicamedica.Models.ListaHorarios.getHorarios(), " ", new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                
+
+
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Inserir" class="btn btn-default" />
+
+            </div>
+        </div>
+        @if ((TempData["Erro"]) != null)
+                {
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @Html.Raw(TempData["Erro"])
+            </div>
+
+
+        }
+    </div>
+}
+
+<div>
+    <ul class="nav nav-tabs nav-justified">
+        <li>@Html.ActionLink("Todas Consultas", "Index")</li>
+    </ul>
+</div>
+
+@section Scripts {
+ 
+}
